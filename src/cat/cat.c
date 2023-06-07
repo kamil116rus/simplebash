@@ -6,6 +6,9 @@ void print_file(char* filename);
 int parser_option(int argc, char** argv, options* option);
 
 int main(int argc, char** argv) {
+    options option = {0};
+    int file_number;
+    file_number = parser_option(argc, argv, &option);
     for (int i = 1; i < argc; i++) {
         print_file(argv[i]);
     }

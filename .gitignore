@@ -50,3 +50,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+/home/kamil/github/simplebash/README_RUS.md

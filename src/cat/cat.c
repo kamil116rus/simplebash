@@ -18,16 +18,16 @@ int main(int argc, char** argv) {
 void print_file(char* filename, options* option) {
     FILE* file = fopen(filename, "r");
     if (file != NULL) {
-        char prev;
-        for (char c = prev = '\n'; (c = fgetc(file)) != EOF; prev = c) {
+        char c, prev;
+        for (; (c = fgetc(file)) != EOF; prev = c) {
+            if (option->flag_n == 1 && option->flag_b == 0) printf("%6d\t", option->flag_n++);
+
+            if (option->flag_b == 1 && c != '\n') printf("%6d\t", option->flag_b++);
+
             if (option->flag_e == 1 && option->flag_v == 1 && c == '\n') printf("$");
-            if (option->flag_n != 0 && prev == '\n') {
-                printf("%6d\t", option->flag_n);
-                option->flag_n++;
-                option->flag_b == 0;
-            }
-            if (option->flag_b != 0 && prev == '\n' && c != '\n') printf("%6d\t", option->flag_b);
-            if (option->flag_b != 0 && c == '\n' && prev != '\n') option->flag_b++;
+            if (option->flag_n > 1 && option->flag_b == 0 && prev == '\n') printf("%6d\t", option->flag_n++);
+
+            if (option->flag_b > 0 && prev == '\n' && c != '\n') printf("%6d\t", option->flag_b++);
 
             putchar(c);
         }

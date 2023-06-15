@@ -19,13 +19,21 @@ void print_file(char* filename, options* option) {
     FILE* file = fopen(filename, "r");
     if (file != NULL) {
         char c, prev;
+        int squeeze = 0;
         for (; (c = fgetc(file)) != EOF; prev = c) {
+            if (option->flag_s == 1) {
+                if (prev == '\n' && c == '\n' && squeeze == 0) {
+                    squeeze = 1;
+                } else if (squeeze == 1 && c == '\n' && prev == '\n')
+                    continue;
+                else if (squeeze == 1 && prev == '\n' && c != '\n')
+                    squeeze = 0;
+            }
             if (option->flag_n == 1 && option->flag_b == 0) printf("%6d\t", option->flag_n++);
-
             if (option->flag_b == 1 && c != '\n') printf("%6d\t", option->flag_b++);
 
             if (option->flag_e == 1 && option->flag_v == 1 && c == '\n') printf("$");
-            if (option->flag_n > 1 && option->flag_b == 0 && prev == '\n') printf("%6d\t", option->flag_n++);
+            if (option->flag_n > 0 && option->flag_b == 0 && prev == '\n') printf("%6d\t", option->flag_n++);
 
             if (option->flag_b > 0 && prev == '\n' && c != '\n') printf("%6d\t", option->flag_b++);
 

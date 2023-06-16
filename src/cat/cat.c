@@ -81,17 +81,17 @@ int parser_option(int argc, char** argv, options* option) {
         else if (flag == 'b')
             option->flag_b = 1;
         else if (flag == 'e')
-            option->flag_e = 1;
-        else if (flag == 'E')
             option->flag_e = option->flag_v = 1;
+        else if (flag == 'E')
+            option->flag_e = 1;
         else if (flag == 'n')
             option->flag_n = 1;
         else if (flag == 's')
             option->flag_s = 1;
         else if (flag == 't')
-            option->flag_t = 1;
-        else if (flag == 'T')
             option->flag_t = option->flag_v = 1;
+        else if (flag == 'T')
+            option->flag_t = 1;
         else if (flag == 'v')
             option->flag_v = 1;
         else

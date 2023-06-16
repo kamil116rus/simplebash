@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
 void print_file(char* filename, options* option) {
     FILE* file = fopen(filename, "r");
     if (file != NULL) {
-        char c, prev;
+        int c, prev;
         int squeeze = 0;
         for (; (c = fgetc(file)) != EOF; prev = c) {
             if (option->flag_s == 1) {
@@ -32,10 +32,29 @@ void print_file(char* filename, options* option) {
             if (option->flag_n == 1 && option->flag_b == 0) printf("%6d\t", option->flag_n++);
             if (option->flag_b == 1 && c != '\n') printf("%6d\t", option->flag_b++);
 
-            if (option->flag_e == 1 && option->flag_v == 1 && c == '\n') printf("$");
+            if (option->flag_e == 1 && option->flag_v == 1 && c == '\n') printf("$");  // под вопросом
             if (option->flag_n > 0 && option->flag_b == 0 && prev == '\n') printf("%6d\t", option->flag_n++);
 
-            if (option->flag_b > 0 && prev == '\n' && c != '\n') printf("%6d\t", option->flag_b++);
+            if (option->flag_b > 1 && prev == '\n' && c != '\n') printf("%6d\t", option->flag_b++);
+
+            if (option->flag_t == 1 && option->flag_v == 1 && c == '\t') {  //функция под вопросом
+                printf("^I");  // работает по разному
+                continue;
+            }
+            if (option->flag_v == 1) {
+                if (c >= 0 && c <= 31 && c != '\t' && c != '\n') {
+                    printf("^");
+                    c = c + 64;
+                }
+                if (c == 127) {
+                    printf("^");
+                    c = c - 64;
+                }
+                //  if (c >127 && c <=255) {
+                //     printf("M-");
+                //     c = c -128 + 64;
+                //  }
+            }
 
             putchar(c);
         }
@@ -63,9 +82,9 @@ int parser_option(int argc, char** argv, options* option) {
         else if (flag == 's')
             option->flag_s = 1;
         else if (flag == 't')
-            option->flag_t = option->flag_v = 1;
+            option->flag_t = 1;
         else if (flag == 'T')
-            option->flag_e = 1;
+            option->flag_t = option->flag_v = 1;
         else if (flag == 'v')
             option->flag_v = 1;
         else

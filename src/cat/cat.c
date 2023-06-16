@@ -32,7 +32,7 @@ void print_file(char* filename, options* option) {
             if (option->flag_n == 1 && option->flag_b == 0) printf("%6d\t", option->flag_n++);
             if (option->flag_b == 1 && c != '\n') printf("%6d\t", option->flag_b++);
 
-            if (option->flag_e == 1 &&  c == '\n') printf("$");  // под вопросом
+          
             if (option->flag_n > 0 && option->flag_b == 0 && prev == '\n') printf("%6d\t", option->flag_n++);
 
             if (option->flag_b > 1 && prev == '\n' && c != '\n') printf("%6d\t", option->flag_b++);
@@ -41,6 +41,7 @@ void print_file(char* filename, options* option) {
                 printf("^I");  // работает по разному
                 continue;
             }
+              if (option->flag_e == 1 &&  c == '\n') printf("$");  // под вопросом
             if (option->flag_v == 1) {
                 if (c >= 0 && c <= 31 && c != '\t' && c != '\n') {
                     printf("^");

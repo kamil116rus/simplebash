@@ -54,11 +54,11 @@ void print_file(char* filename, options* option) {
                     printf("M-^");
                     c = c - 64;
                 } else if (c > 159 && c < 255) {
-                    printf("M-^");
+                    printf("M-");
                     c = c - 128;
                 }
                 if (c == 255) {
-                    printf("M-^");
+                    printf("M-");
                     c = c - 192;
                 }
             }

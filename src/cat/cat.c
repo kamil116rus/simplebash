@@ -50,10 +50,17 @@ void print_file(char* filename, options* option) {
                     printf("^");
                     c = c - 64;
                 }
-                //  if (c >127 && c <=255) {
-                //     printf("M-");
-                //     c = c -128 + 64;
-                //  }
+                if (c >= 128 && c <= 159) {
+                    printf("M-^");
+                    c = c - 64;
+                } else if (c > 159 && c < 255) {
+                    printf("M-^");
+                    c = c - 128;
+                }
+                if (c == 255) {
+                    printf("M-^");
+                    c = c - 192;
+                }
             }
 
             putchar(c);

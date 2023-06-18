@@ -9,10 +9,12 @@ int main(int argc, char** argv) {
     options option = {0};
     int file_number;
     file_number = parser_option(argc, argv, &option);
-    for (; file_number < argc; file_number++) {
-        print_file(argv[file_number], &option);
+    if (option.error == 0) {
+        for (; file_number < argc; file_number++) {
+            print_file(argv[file_number], &option);
+        }
     }
-    return 0;
+    return (option.error == 1) ? 1 : 0;
 }
 
 void print_file(char* filename, options* option) {
@@ -66,8 +68,10 @@ void print_file(char* filename, options* option) {
 
             putchar(c);
         }
+        fclose(file);
+    } else {
+        fprintf(stderr, "cat: %s: No such file or directory\n", filename);
     }
-    fclose(file);
 }
 
 int parser_option(int argc, char** argv, options* option) {
@@ -96,8 +100,9 @@ int parser_option(int argc, char** argv, options* option) {
             option->flag_t = 1;
         else if (flag == 'v')
             option->flag_v = 1;
-        else
+        else {
             option->error = 1;
+        }
     }
     return optind;
 }

@@ -21,33 +21,24 @@ declare -a TEXT_FILES=(
   "../tests/1.txt"
   "../tests/2.txt"
   "../tests/3.txt"
-)
 
-#declare -a TEMPLATES=(
- # "-e Te"
-#  "-e lor"
-#  "-e wer"
-#  "-e sdg"
-#  "-e sdg -e Te"
-#)
+)
 
 for flags in ${FLAGS_PARAMS[@]}; do
   for files in ${TEXT_FILES[@]}; do
-   # for template in ${TEMPLATES[@]}; do
       cat $flags  $files > test_cat.log
       ./cat $flags  $files > test_my_cat.log
 
       echo "TEST FOR: $flags $files"
       if cmp -s test_my_cat.log test_cat.log ; then
-        ((SUCCESS++))
+        ((SUCCESS_COUNT++))
         
         echo "SUCCESS"
       else 
-        ((ERROR++))
+        ((ERROR_COUNT++))
         echo "FAILS"
       fi
       rm *.log
-    #done
   done
 done
 

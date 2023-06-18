@@ -7,7 +7,7 @@ parametr2=$2
 
 script_name=$0 #присваиваем переменной script_name значение имени скрипта
 
-echo "Вы запустили скрипт с именем $script_name и параметром $@"
+echo "Вы запустили скрипт с именем $script_name и параметрами $@"
 clang-format -i *.c *.h
 
 git add . 

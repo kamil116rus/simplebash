@@ -69,10 +69,10 @@ void print_file(char* filename, options* option) {
 }
 
 int parser_option(int argc, char** argv, options* option) {
-    static struct option long_options[] = {{"--number-nonblank", 0, 0, 'b'},
-                                           {"--number", no_argument, NULL, 'n'},
-                                           {"--squeeze-blank", 0, 0, 's'},
-                                           {0, 0, 0, 0}};
+    const struct option long_options[] = {{"number-nonblank", 0, 0, 'b'},
+                                          {"number", no_argument, NULL, 'n'},
+                                          {"squeeze-blank", 0, 0, 's'},
+                                          {0, 0, 0, 0}};
     int flag = 0;
 
     while ((flag = getopt_long(argc, argv, "AbeEnstTv", long_options, NULL)) != -1) {

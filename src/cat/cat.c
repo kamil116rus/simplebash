@@ -6,12 +6,13 @@ int main(int argc, char** argv) {
     options option = {0};
     int file_number;
     file_number = parser_option(argc, argv, &option);
+    // printf("%s", argv[file_number]);
     if (option.error == 0) {
         for (; file_number < argc; file_number++) {
             print_file(argv[file_number], &option);
         }
     }
-    return (option.error == 1) ? 1 : 0;
+    return (option.error) ? 1 : 0;
 }
 
 void print_file(char* filename, options* option) {

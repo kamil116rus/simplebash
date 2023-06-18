@@ -15,4 +15,7 @@ typedef struct {
     int error;
 } options;
 
+void print_file(char* filename, options* option);
+int parser_option(int argc, char** argv, options* option);
+
 #endif

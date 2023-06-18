@@ -2,9 +2,6 @@
 
 #include <stdio.h>
 
-void print_file(char* filename, options* option);
-int parser_option(int argc, char** argv, options* option);
-
 int main(int argc, char** argv) {
     options option = {0};
     int file_number;
@@ -36,14 +33,12 @@ void print_file(char* filename, options* option) {
                 printf("%6d\t", option->flag_b++);
             else if (option->flag_b > 1 && prev == '\n' && c != '\n')
                 printf("%6d\t", option->flag_b++);
-
             if (option->flag_n > 0 && option->flag_b == 0 && prev == '\n') printf("%6d\t", option->flag_n++);
-
-            if (option->flag_t == 1 && c == '\t') {  //функция под вопросом
-                printf("^I");                        // работает по разному
+            if (option->flag_t == 1 && c == '\t') {
+                printf("^I");
                 continue;
             }
-            if (option->flag_e == 1 && c == '\n') printf("$");  // под вопросом
+            if (option->flag_e == 1 && c == '\n') printf("$");
             if (option->flag_v == 1) {
                 if (c >= 0 && c <= 31 && c != '\t' && c != '\n') {
                     printf("^");
@@ -65,7 +60,6 @@ void print_file(char* filename, options* option) {
                     c = c - 192;
                 }
             }
-
             putchar(c);
         }
         fclose(file);
@@ -76,8 +70,8 @@ void print_file(char* filename, options* option) {
 
 int parser_option(int argc, char** argv, options* option) {
     static struct option long_options[] = {{"--number-nonblank", 0, 0, 'b'},
-                                           {"--number", 0, 0, 'n'},
-                                           {"--squeeze-blank)", 0, 0, 's'},
+                                           {"--number", no_argument, NULL, 'n'},
+                                           {"--squeeze-blank", 0, 0, 's'},
                                            {0, 0, 0, 0}};
     int flag = 0;
 

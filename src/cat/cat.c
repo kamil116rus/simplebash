@@ -30,11 +30,12 @@ void print_file(char* filename, options* option) {
                     squeeze = 0;
             }
             if (option->flag_n == 1 && option->flag_b == 0) printf("%6d\t", option->flag_n++);
-            if (option->flag_b == 1 && c != '\n') printf("%6d\t", option->flag_b++);
+            if (option->flag_b == 1 && c != '\n')
+                printf("%6d\t", option->flag_b++);
+            else if (option->flag_b > 1 && prev == '\n' && c != '\n')
+                printf("%6d\t", option->flag_b++);
 
             if (option->flag_n > 0 && option->flag_b == 0 && prev == '\n') printf("%6d\t", option->flag_n++);
-
-            if (option->flag_b > 1 && prev == '\n' && c != '\n') printf("%6d\t", option->flag_b++);
 
             if (option->flag_t == 1 && c == '\t') {  //функция под вопросом
                 printf("^I");                        // работает по разному

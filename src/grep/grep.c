@@ -1,3 +1,6 @@
-#include <stdio.h>
 
-int main() { return 0; }
+#include "grep.h"
+
+int main(int argc, char **argv) {
+    grep_programm(argc, argv);
+    return 0; }

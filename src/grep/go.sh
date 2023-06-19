@@ -8,7 +8,7 @@ parametr2=$2
 script_name=$0 #присваиваем переменной script_name значение имени скрипта
 
 echo "Вы запустили скрипт с именем $script_name и параметр $@"
-clang-format -i *.c *.h
+clang-format -style=Google -n *.c *.h
 
 git add . 
 git commit -m"$parametr1 $2 $3 $4 $5 $6 $7"

@@ -2,8 +2,10 @@
 #define CAT_H
 
 #include <getopt.h>
+#include <regex.h>make
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
 
 typedef struct {
   int flag_e;
